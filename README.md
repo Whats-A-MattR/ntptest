@@ -34,6 +34,12 @@ Now you can run `ntptest` from any terminal window.
 ntptest --help
 ```
 
+### Test against a specific NTP server
+
+```bash
+ntptest --server time.google.com
+```
+
 ---
 
 ## 🛠 Building from Source
