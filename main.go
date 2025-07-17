@@ -23,8 +23,25 @@ func main() {
 	// parse the command line flags
 	serverPtr := flag.String("server", "pool.ntp.org", "NTP server to query (e.g., time.google.com or pool.ntp.org)")
 
-	// parse CLI flags
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, `ntptest - A simple cross-platform CLI tool for NTP testing
+
+Usage:
+	ntptest [options]
+
+Options:
+`)
+		flag.PrintDefaults()
+	}
+
+	// parse the flags
 	flag.Parse()
+
+	// manually handle -h / --help (Go's built-in only handles -h)
+	if len(os.Args) > 1 && (os.Args[1] == "--help" || os.Args[1] == "-help") {
+		flag.Usage()
+		os.Exit(0)
+	}
 
 	// get the NTP Server Address from parsed flag value
 	ntpServer := *serverPtr
