@@ -52,6 +52,26 @@ cd ntptest
 go build -o ntptest main.go
 ```
 
+OR, use `make`:
+
+```bash
+git clone https://github.com/Whats-A-MattR/ntptest.git
+cd ntptest
+make local
+```
+
+```bash
+# or to build for all platforms
+make all
+```
+
+```bash
+# or to build for a specific platform
+make linux # for Linux
+make windows # for Windows
+make darwin # for macOS
+```
+
 ---
 
 ## 📄 License
