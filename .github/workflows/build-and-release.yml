@@ -30,10 +30,12 @@ jobs:
 
       - name: Build for ${{ matrix.goos }}/${{ matrix.goarch }}
         run: |
-          mkdir -p bin/${{ matrix.goos }}
           EXT=""
           [ "${{ matrix.goos }}" = "windows" ] && EXT=".exe"
-          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o bin/${{ matrix.goos }}/ntptest${EXT} main.go
+          OUTPUT=ntptest-${{ matrix.goos }}-${{ matrix.goarch }}$EXT
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o $OUTPUT main.go
+          mkdir -p dist
+          mv $OUTPUT dist/
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -57,5 +59,6 @@ jobs:
         with:
           files: |
             dist/**/*
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
