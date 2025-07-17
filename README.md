@@ -37,7 +37,7 @@ ntptest --help
 ### Test against a specific NTP server
 
 ```bash
-ntptest --server time.google.com
+ntptest -server time.google.com
 ```
 
 ---
