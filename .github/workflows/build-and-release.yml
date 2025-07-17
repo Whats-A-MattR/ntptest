@@ -30,6 +30,7 @@ jobs:
 
       - name: Build for ${{ matrix.goos }}/${{ matrix.goarch }}
         run: |
+          set -e
           EXT=""
           [ "${{ matrix.goos }}" = "windows" ] && EXT=".exe"
           OUTPUT=ntptest-${{ matrix.goos }}-${{ matrix.goarch }}$EXT
@@ -40,9 +41,8 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ntptest-${{ matrix.goos }}
-          path: bin/${{ matrix.goos }}/
-
+          name: ntptest-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: dist/*
   release:
     name: Create Release
     needs: build
